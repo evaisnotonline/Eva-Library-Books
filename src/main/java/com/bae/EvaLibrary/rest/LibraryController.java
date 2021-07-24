@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,6 +28,11 @@ public class LibraryController {
 		this.Library.remove(id);
 
 		return "You have borrowed book number: " + id;
+	}
+
+	@GetMapping("/getAllBooks")
+	public List<Book> getAllBooks() {
+		return this.Library;
 	}
 
 }
