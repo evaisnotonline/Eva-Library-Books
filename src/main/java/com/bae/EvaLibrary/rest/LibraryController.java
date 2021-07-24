@@ -38,7 +38,12 @@ public class LibraryController {
 
 	@PutMapping("/replaceBook/{id}")
 	public Book replaceBook(@PathVariable int id, @RequestBody Book newBook) {
-		return this.Library.set(id, newBook); // replace the kitten at index id
+		return this.Library.set(id, newBook);
 	}
 
+	@GetMapping("/getBook/{id}")
+	public Book getBook(@PathVariable int id) {
+		Book found = this.Library.get(id);
+		return found;
+	}
 }
