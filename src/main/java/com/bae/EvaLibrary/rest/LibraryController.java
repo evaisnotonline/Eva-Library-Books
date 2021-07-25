@@ -38,6 +38,21 @@ public class LibraryController {
 		return this.service.getAllBooks();
 	}
 
+	@GetMapping("/getByTitle/{title}")
+	public List<Book> getByTitle(@PathVariable String title) {
+		return this.service.getByTitle(title);
+	}
+
+	@GetMapping("/getByAuthor/{author}")
+	public List<Book> getByAuthor(@PathVariable String author) {
+		return this.service.getByAuthor(author);
+	}
+
+	@GetMapping("/getByPublisher/{publisher}")
+	public List<Book> getByPublisher(@PathVariable String publisher) {
+		return this.service.getByPublisher(publisher);
+	}
+
 	@GetMapping("/getBook/{id}")
 	public Book getBook(@PathVariable int id) {
 		Book found = this.service.getBook(id);

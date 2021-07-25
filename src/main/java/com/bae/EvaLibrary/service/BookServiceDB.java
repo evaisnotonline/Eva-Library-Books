@@ -30,13 +30,28 @@ public class BookServiceDB implements BookService {
 	}
 
 	@Override
+	public List<Book> getByTitle(String title) {
+		return this.repo.findByTitle(title);
+	}
+
+	@Override
+	public List<Book> getByAuthor(String author) {
+		return this.repo.findByAuthor(author);
+	}
+
+	@Override
+	public List<Book> getByPublisher(String publisher) {
+		return this.repo.findByPublisher(publisher);
+	}
+
+	@Override
 	public Book getBook(int id) {
 		return this.repo.findById(id).get();
 	}
 
 	@Override
 	public Book updateBook(int id, Book newBook) {
-		Book found = this.repo.getById(id);
+		Book found = this.repo.findById(id).get();
 
 		found.setTitle(newBook.getTitle());
 		found.setAuthor(newBook.getAuthor());

@@ -16,4 +16,10 @@ public interface BookService {
 
 	public String deleteBook(int id);
 
+	List<Book> getByTitle(String title);
+
+	List<Book> getByAuthor(String author);
+
+	List<Book> getByPublisher(String publisher);
+
 }
