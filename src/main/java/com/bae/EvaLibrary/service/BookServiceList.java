@@ -41,4 +41,22 @@ public class BookServiceList implements BookService {
 		return "Deleted book with id: " + id;
 	}
 
+	@Override
+	public List<Book> getByTitle(String title) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Book> getByAuthor(String author) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Book> getByPublisher(String publisher) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
