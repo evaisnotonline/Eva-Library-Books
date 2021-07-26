@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LibraryRepo extends JpaRepository<Book, Integer> {
 
-	List<Book> findByTitle(String title);
+	List<Book> findByTitleIgnoreCase(String title);
 
-	List<Book> findByAuthor(String author);
+	List<Book> findByAuthorIgnoreCase(String author);
 
-	List<Book> findByPublisher(String publisher);
+	List<Book> findByPublisherIgnoreCase(String publisher);
 
 }

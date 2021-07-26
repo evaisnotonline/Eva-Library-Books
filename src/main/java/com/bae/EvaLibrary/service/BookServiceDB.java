@@ -31,17 +31,17 @@ public class BookServiceDB implements BookService {
 
 	@Override
 	public List<Book> getByTitle(String title) {
-		return this.repo.findByTitle(title);
+		return this.repo.findByTitleIgnoreCase(title);
 	}
 
 	@Override
 	public List<Book> getByAuthor(String author) {
-		return this.repo.findByAuthor(author);
+		return this.repo.findByAuthorIgnoreCase(author);
 	}
 
 	@Override
 	public List<Book> getByPublisher(String publisher) {
-		return this.repo.findByPublisher(publisher);
+		return this.repo.findByPublisherIgnoreCase(publisher);
 	}
 
 	@Override
