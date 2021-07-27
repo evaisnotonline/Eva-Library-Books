@@ -44,4 +44,26 @@ public class BookServiceDBUnitTest {
 				.save(new Book(id, "The Picture of Dorian Gray", "Oscar Wilde", "Vintage Classics"));
 	}
 
+	@Test
+	void testDeleteSucceeds() {
+		int id = 1;
+
+		Mockito.when(this.repo.existsById(id)).thenReturn(false);
+
+		assertThat(this.service.deleteBook(id)).isEqualTo("Borrowed: " + id);
+
+		Mockito.verify(this.repo, Mockito.times(1)).existsById(id);
+	}
+
+	@Test
+	void testDeleteFails() {
+		int id = 1;
+
+		Mockito.when(this.repo.existsById(id)).thenReturn(true);
+
+		assertThat(this.service.deleteBook(id)).isEqualTo("Not Borrowed: " + id);
+
+		Mockito.verify(this.repo, Mockito.times(1)).existsById(id);
+	}
+
 }

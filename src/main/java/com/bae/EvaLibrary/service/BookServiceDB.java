@@ -53,17 +53,11 @@ public class BookServiceDB implements BookService {
 	public Book updateBook(int id, Book newBook) {
 		Book found = this.repo.findById(id).get();
 
-		System.out.println("FOUND: " + found); // !!!!
-
 		found.setTitle(newBook.getTitle());
 		found.setAuthor(newBook.getAuthor());
 		found.setPublisher(newBook.getPublisher());
 
-		System.out.println("FOUND AFTER UPDATE: " + found); // !!!!
-
 		Book updated = this.repo.save(found);
-
-		System.out.println("UPDATED: " + updated); // !!!!
 
 		return updated;
 	}
@@ -71,7 +65,12 @@ public class BookServiceDB implements BookService {
 	@Override
 	public String deleteBook(int id) {
 		this.repo.deleteById(id);
-		return "Deleted: " + id;
+
+		if (this.repo.existsById(id)) {
+			return "Not Borrowed: " + id;
+		} else {
+			return "Borrowed: " + id;
+		}
 	}
 
 }
