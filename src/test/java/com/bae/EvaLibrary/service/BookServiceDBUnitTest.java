@@ -2,6 +2,7 @@ package com.bae.EvaLibrary.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -77,6 +78,17 @@ public class BookServiceDBUnitTest {
 		assertThat(this.service.addBook(newBook)).isEqualTo(savedBook);
 
 		Mockito.verify(this.repo, Mockito.times(1)).save(newBook);
+	}
+
+	@Test
+	void testGetAll() {
+		List<Book> testLibrary = List.of(new Book("Gravity's Rainbow", "Thomas Pynchon", "Penguin CLassics"));
+
+		Mockito.when(this.repo.findAll()).thenReturn(testLibrary);
+
+		assertThat(this.service.getAllBooks()).isEqualTo(testLibrary);
+
+		Mockito.verify(this.repo, Mockito.times(1)).findAll();
 	}
 
 }
