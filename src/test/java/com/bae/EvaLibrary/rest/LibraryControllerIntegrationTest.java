@@ -1,6 +1,7 @@
 package com.bae.EvaLibrary.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -75,6 +76,21 @@ public class LibraryControllerIntegrationTest {
 		ResultMatcher checkStatus = status().isAccepted();
 
 		ResultMatcher checkBody = content().json(newBookAsJSON);
+
+		this.mockMVC.perform(req).andExpect(checkStatus).andExpect(checkBody);
+	}
+
+	@Test
+	void findById() throws Exception {
+		RequestBuilder req = get("/getBook/1");
+
+		ResultMatcher checkStatus = status().isOk();
+
+		Book testBook = new Book(1, "The Picture of Dorian Gray", "Oscar Wilde", "Vintage Classics");
+
+		String testBookAsJSON = this.mapper.writeValueAsString(testBook);
+
+		ResultMatcher checkBody = content().json(testBookAsJSON);
 
 		this.mockMVC.perform(req).andExpect(checkStatus).andExpect(checkBody);
 	}
