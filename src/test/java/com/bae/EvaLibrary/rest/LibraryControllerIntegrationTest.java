@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -93,6 +95,51 @@ public class LibraryControllerIntegrationTest {
 		ResultMatcher checkBody = content().json(testBookAsJSON);
 
 		this.mockMVC.perform(req).andExpect(checkStatus).andExpect(checkBody);
+	}
+
+	@Test
+	void testFindByTitle() throws Exception {
+		RequestBuilder request = get("/getByTitle/The Picture of Dorian Gray");
+
+		ResultMatcher checkStatus = status().isOk();
+
+		List<Book> testBooks = List.of(new Book(1, "The Picture of Dorian Gray", "Oscar Wilde", "Vintage Classics"));
+
+		String testBooksAsJSON = this.mapper.writeValueAsString(testBooks);
+
+		ResultMatcher checkBody = content().json(testBooksAsJSON);
+
+		this.mockMVC.perform(request).andExpect(checkStatus).andExpect(checkBody);
+	}
+
+	@Test
+	void testFindByAuthor() throws Exception {
+		RequestBuilder request = get("/getByAuthor/Oscar Wilde");
+
+		ResultMatcher checkStatus = status().isOk();
+
+		List<Book> testBooks = List.of(new Book(1, "The Picture of Dorian Gray", "Oscar Wilde", "Vintage Classics"));
+
+		String testBooksAsJSON = this.mapper.writeValueAsString(testBooks);
+
+		ResultMatcher checkBody = content().json(testBooksAsJSON);
+
+		this.mockMVC.perform(request).andExpect(checkStatus).andExpect(checkBody);
+	}
+
+	@Test
+	void testFindByPublisher() throws Exception {
+		RequestBuilder request = get("/getByPublisher/Vintage Classics");
+
+		ResultMatcher checkStatus = status().isOk();
+
+		List<Book> testBooks = List.of(new Book(1, "The Picture of Dorian Gray", "Oscar Wilde", "Vintage Classics"));
+
+		String testBooksAsJSON = this.mapper.writeValueAsString(testBooks);
+
+		ResultMatcher checkBody = content().json(testBooksAsJSON);
+
+		this.mockMVC.perform(request).andExpect(checkStatus).andExpect(checkBody);
 	}
 
 }
