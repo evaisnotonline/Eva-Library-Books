@@ -18,6 +18,7 @@ import com.bae.EvaLibrary.service.BookService;
 
 @RestController
 @CrossOrigin
+
 public class LibraryController {
 
 	private BookService service;
@@ -60,13 +61,15 @@ public class LibraryController {
 	}
 
 	@PutMapping("/updateBook/{id}")
-	public Book updateBook(@PathVariable int id, @RequestBody Book newBook) {
-		return this.service.updateBook(id, newBook);
+	public ResponseEntity<Book> replaceBook(@PathVariable int id, @RequestBody Book newBook) {
+		Book body = this.service.updateBook(id, newBook);
+		return new ResponseEntity<Book>(body, HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("/deleteBook/{id}")
-	public String deleteBook(@PathVariable int id) {
-		return this.service.deleteBook(id);
+	public ResponseEntity<String> deleteBook(@PathVariable int id) {
+		String body = this.service.deleteBook(id);
+		return new ResponseEntity<String>(body, HttpStatus.NO_CONTENT);
 	}
 
 }
