@@ -66,4 +66,17 @@ public class BookServiceDBUnitTest {
 		Mockito.verify(this.repo, Mockito.times(1)).existsById(id);
 	}
 
+	@Test
+	void testCreate() {
+		Book newBook = new Book("Gravity's Rainbow", "Thomas Pynchon", "Penguin CLassics");
+
+		Book savedBook = new Book(1, "Gravity's Rainbow", "Thomas Pynchon", "Penguin CLassics");
+
+		Mockito.when(this.repo.save(newBook)).thenReturn(savedBook);
+
+		assertThat(this.service.addBook(newBook)).isEqualTo(savedBook);
+
+		Mockito.verify(this.repo, Mockito.times(1)).save(newBook);
+	}
+
 }

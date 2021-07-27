@@ -6,7 +6,7 @@ import com.bae.EvaLibrary.data.Book;
 
 public interface BookService {
 
-	public Book createBook(Book book);
+	public Book addBook(Book book);
 
 	public List<Book> getAllBooks();
 

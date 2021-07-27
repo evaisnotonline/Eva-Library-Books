@@ -20,7 +20,7 @@ public class BookServiceDB implements BookService {
 	}
 
 	@Override
-	public Book createBook(Book book) {
+	public Book addBook(Book book) {
 		return this.repo.save(book);
 	}
 
