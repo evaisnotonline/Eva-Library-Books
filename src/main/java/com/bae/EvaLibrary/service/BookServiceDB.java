@@ -53,11 +53,18 @@ public class BookServiceDB implements BookService {
 	public Book updateBook(int id, Book newBook) {
 		Book found = this.repo.findById(id).get();
 
+		System.out.println("FOUND: " + found); // !!!!
+
 		found.setTitle(newBook.getTitle());
 		found.setAuthor(newBook.getAuthor());
 		found.setPublisher(newBook.getPublisher());
 
+		System.out.println("FOUND AFTER UPDATE: " + found); // !!!!
+
 		Book updated = this.repo.save(found);
+
+		System.out.println("UPDATED: " + updated); // !!!!
+
 		return updated;
 	}
 
