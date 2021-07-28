@@ -46,7 +46,8 @@ public class BookServiceDB implements BookService {
 
 	@Override
 	public Book getBook(int id) {
-		return this.repo.findById(id).get();
+		Book found = this.repo.findById(id).get();
+		return found;
 	}
 
 	@Override

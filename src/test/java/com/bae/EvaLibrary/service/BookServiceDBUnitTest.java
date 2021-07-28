@@ -82,13 +82,69 @@ public class BookServiceDBUnitTest {
 
 	@Test
 	void testGetAll() {
-		List<Book> testLibrary = List.of(new Book("Gravity's Rainbow", "Thomas Pynchon", "Penguin CLassics"));
+		List<Book> testLibrary = List.of(new Book(1, "Gravity's Rainbow", "Thomas Pynchon", "Penguin CLassics"));
 
 		Mockito.when(this.repo.findAll()).thenReturn(testLibrary);
 
 		assertThat(this.service.getAllBooks()).isEqualTo(testLibrary);
 
 		Mockito.verify(this.repo, Mockito.times(1)).findAll();
+	}
+
+	@Test
+	void testGetByTitle() {
+
+		List<Book> testLibrary = List.of(new Book(1, "Gravity's Rainbow", "Thomas Pynchon", "Penguin CLassics"));
+
+		String search = "Gravity's Rainbow";
+		Mockito.when(this.repo.findByTitleIgnoreCase(search)).thenReturn(testLibrary);
+
+		assertThat(this.service.getByTitle(search)).isEqualTo(testLibrary);
+
+		Mockito.verify(this.repo, Mockito.times(1)).findByTitleIgnoreCase(search);
+	}
+
+	@Test
+	void testGetByAuthor() {
+
+		List<Book> testLibrary = List.of(new Book(1, "Gravity's Rainbow", "Thomas Pynchon", "Penguin CLassics"));
+
+		String search = "Thomas Pynchon";
+		Mockito.when(this.repo.findByAuthorIgnoreCase(search)).thenReturn(testLibrary);
+
+		assertThat(this.service.getByAuthor(search)).isEqualTo(testLibrary);
+
+		Mockito.verify(this.repo, Mockito.times(1)).findByAuthorIgnoreCase(search);
+	}
+
+	@Test
+	void testGetByPublisher() {
+
+		List<Book> testLibrary = List.of(new Book(1, "Gravity's Rainbow", "Thomas Pynchon", "Penguin CLassics"));
+
+		String search = "Penguin Classics";
+		Mockito.when(this.repo.findByPublisherIgnoreCase(search)).thenReturn(testLibrary);
+
+		assertThat(this.service.getByPublisher(search)).isEqualTo(testLibrary);
+
+		Mockito.verify(this.repo, Mockito.times(1)).findByPublisherIgnoreCase(search);
+	}
+
+	@Test
+	void testGetById() {
+
+		int id = 1;
+		Book testBook = new Book(id, "Gravity's Rainbow", "Thomas Pynchon", "Penguin Classics");
+
+		Mockito.when(this.repo.findById(id)).thenReturn(Optional.of(testBook));
+		Mockito.when(this.repo.save(new Book(id, "Gravity's Rainbow", "Thomas Pynchon", "Penguin Classics")))
+				.thenReturn(testBook);
+
+		Book actual = this.service.getBook(id);
+
+		assertThat(actual).isEqualTo(testBook);
+
+		Mockito.verify(this.repo, Mockito.times(1)).findById(id);
 	}
 
 }
