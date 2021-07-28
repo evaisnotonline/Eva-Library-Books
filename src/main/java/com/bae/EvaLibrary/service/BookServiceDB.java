@@ -20,7 +20,7 @@ public class BookServiceDB implements BookService {
 	}
 
 	@Override
-	public Book createBook(Book book) {
+	public Book addBook(Book book) {
 		return this.repo.save(book);
 	}
 
@@ -46,7 +46,8 @@ public class BookServiceDB implements BookService {
 
 	@Override
 	public Book getBook(int id) {
-		return this.repo.findById(id).get();
+		Book found = this.repo.findById(id).get();
+		return found;
 	}
 
 	@Override
@@ -58,13 +59,19 @@ public class BookServiceDB implements BookService {
 		found.setPublisher(newBook.getPublisher());
 
 		Book updated = this.repo.save(found);
+
 		return updated;
 	}
 
 	@Override
 	public String deleteBook(int id) {
 		this.repo.deleteById(id);
-		return "Deleted: " + id;
+
+		if (this.repo.existsById(id)) {
+			return "Not Borrowed: " + id;
+		} else {
+			return "Borrowed: " + id;
+		}
 	}
 
 }

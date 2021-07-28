@@ -13,7 +13,7 @@ public class BookServiceList implements BookService {
 	private List<Book> Library = new ArrayList<>();
 
 	@Override
-	public Book createBook(Book book) {
+	public Book addBook(Book book) {
 		System.out.println(book);
 		this.Library.add(book);
 		return this.Library.get(this.Library.size() - 1);
