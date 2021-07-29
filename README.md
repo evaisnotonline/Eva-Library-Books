@@ -17,7 +17,7 @@ This is the README for
 
 ## Resources
 
-* Presentation [located here](URL)
+* Presentation [located here](https://1drv.ms/p/s!AqKCr3OHE2VblGeGp9qf8aFQD9o2?e=uPXaKl)
 * Jira Board [located here](https://testjira1322.atlassian.net/jira/software/projects/ELB/boards/5/roadmap)
 
 ## Brief
